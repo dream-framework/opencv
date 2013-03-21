@@ -6,8 +6,8 @@
 required_version "0.6"
 
 define_target "opencv" do |target|
-	target.install do |environment|
-		install_external(package.path, "opencv-2.4.3", environment) do |config, fresh|
+	target.build do |environment|
+		build_external(package.path, "opencv-2.4.3", environment) do |config, fresh|
 			Commands.run("cmake", "-G", "Unix Makefiles",
 				"-DCMAKE_INSTALL_PREFIX:PATH=#{config.install_prefix}",
 				"-DCMAKE_PREFIX_PATH=#{config.install_prefix}",
