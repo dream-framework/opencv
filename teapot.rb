@@ -41,6 +41,6 @@ define_target "opencv" do |target|
 	target.depends "Library/z"
 	
 	target.provides "Library/opencv" do
-		append linkflags "-lopencv"
+		append linkflags ["-lopencv_calib3d", "-lopencv_core", "-lopencv_features2d", "-lopencv_flann", "-lopencv_imgproc", "-lopencv_ml", "-lopencv_photo", "-lopencv_video"]
 	end
 end
