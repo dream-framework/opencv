@@ -34,6 +34,8 @@ define_target "opencv" do |target|
 	end
 	
 	target.depends :platform
+	target.depends "Language/C++11"
+	
 	target.depends "Library/png"
 	target.depends "Library/jpeg"
 	target.depends "Library/z"
