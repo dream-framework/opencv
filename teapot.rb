@@ -15,6 +15,7 @@ define_target "opencv" do |target|
 				"-DCMAKE_C_COMPILER_WORKS=TRUE",
 				"-DBUILD_opencv_legacy=OFF",
 				"-DBUILD_opencv_nonfree=OFF",
+				"-DBUILD_opencv_java=OFF",
 				"-DBUILD_opencv_ts=OFF",
 				"-DBUILD_opencv_ts=OFF",
 				"-DBUILD_opencv_objdetect=OFF",
