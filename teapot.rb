@@ -7,7 +7,7 @@ teapot_version "0.8.0"
 
 define_target "opencv" do |target|
 	target.build do |environment|
-		build_external(package.path, "opencv-2.4.4", environment) do |config, fresh|
+		build_external(package.path, "opencv-2.4.5", environment) do |config, fresh|
 			Commands.run("cmake", "-G", "Unix Makefiles",
 				"-DCMAKE_INSTALL_PREFIX:PATH=#{config.install_prefix}",
 				"-DCMAKE_PREFIX_PATH=#{config.install_prefix}",
@@ -43,4 +43,13 @@ define_target "opencv" do |target|
 	target.provides "Library/opencv" do
 		append linkflags ["-lopencv_calib3d", "-lopencv_core", "-lopencv_features2d", "-lopencv_flann", "-lopencv_imgproc", "-lopencv_ml", "-lopencv_photo", "-lopencv_video"]
 	end
+end
+
+define_configuration "opencv" do |configuration|
+	configuration[:source] = "https://github.com/dream-framework/"
+	
+	configuration.import! "platforms"
+	
+	configuration.require "png"
+	configuration.require "jpeg"
 end
