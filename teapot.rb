@@ -46,9 +46,8 @@ define_target "opencv" do |target|
 end
 
 define_configuration "opencv" do |configuration|
-	configuration[:source] = "https://github.com/dream-framework/"
+	configuration.public!
 	
-	configuration.require "platforms"
 	configuration.require "png"
 	configuration.require "jpeg"
 end
