@@ -48,8 +48,7 @@ end
 define_configuration "opencv" do |configuration|
 	configuration[:source] = "https://github.com/dream-framework/"
 	
-	configuration.import! "platforms"
-	
+	configuration.require "platforms"
 	configuration.require "png"
 	configuration.require "jpeg"
 end
