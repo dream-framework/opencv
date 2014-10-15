@@ -9,7 +9,7 @@ define_target "opencv" do |target|
 	target.build do
 		source_files = Files::Directory.join(target.package.path, "opencv-2.4.10")
 		cache_prefix = Files::Directory.join(environment[:build_prefix], "opencv-2.4.10-#{environment.checksum}")
-		package_files = Path.join(environment[:install_prefix], "lib/pkgconfig/opencv-2.4.10.pc")
+		package_files = Path.join(environment[:install_prefix], "lib/pkgconfig/opencv.pc")
 		
 		cmake source: source_files, build_prefix: cache_prefix, arguments: [
 			"-DCMAKE_CXX_COMPILER_WORKS=TRUE",
