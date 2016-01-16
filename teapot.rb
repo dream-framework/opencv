@@ -7,8 +7,8 @@ teapot_version "1.0"
 
 define_target "opencv" do |target|
 	target.build do
-		source_files = Files::Directory.join(target.package.path, "opencv-3.0.0")
-		cache_prefix = Files::Directory.join(environment[:build_prefix], "opencv-3.0.0-#{environment.checksum}")
+		source_files = Files::Directory.join(target.package.path, "opencv-3.1.0")
+		cache_prefix = Files::Directory.join(environment[:build_prefix], "opencv-3.1.0-#{environment.checksum}")
 		package_files = Path.join(environment[:install_prefix], "lib/pkgconfig/opencv.pc")
 		
 		cmake source: source_files, build_prefix: cache_prefix, arguments: [
