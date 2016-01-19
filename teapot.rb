@@ -6,21 +6,33 @@
 teapot_version "1.0"
 
 define_target "opencv" do |target|
+	OPENCV_LIBRARIES = [
+		"share/OpenCV/3rdparty/lib/libippicv.a",
+		"lib/libopencv_calib3d.a",
+		"lib/libopencv_core.a",
+		"lib/libopencv_features2d.a",
+		"lib/libopencv_flann.a",
+		"lib/libopencv_highgui.a",
+		"lib/libopencv_imgproc.a",
+		"lib/libopencv_ml.a",
+		"lib/libopencv_objdetect.a",
+		"lib/libopencv_photo.a",
+		"lib/libopencv_video.a"
+	]
+	
 	target.build do
 		source_files = Files::Directory.join(target.package.path, "opencv-3.1.0")
 		cache_prefix = Files::Directory.join(environment[:build_prefix], "opencv-3.1.0-#{environment.checksum}")
-		package_files = Path.join(environment[:install_prefix], "lib/pkgconfig/opencv.pc")
+		package_files = Files::Paths.directory(environment[:install_prefix], OPENCV_LIBRARIES)
 		
 		cmake source: source_files, build_prefix: cache_prefix, arguments: [
 			"-DCMAKE_CXX_COMPILER_WORKS=TRUE",
 			"-DCMAKE_C_COMPILER_WORKS=TRUE",
-			"-DBUILD_opencv_legacy=OFF",
-			"-DBUILD_opencv_nonfree=OFF",
 			"-DBUILD_opencv_java=OFF",
 			"-DBUILD_opencv_ts=OFF",
 			"-DBUILD_opencv_ts=OFF",
-			"-DBUILD_opencv_objdetect=OFF",
-			"-DBUILD_opencv_highgui=OFF",
+			#"-DBUILD_opencv_objdetect=OFF",
+			#"-DBUILD_opencv_highgui=OFF",
 			# 3rd party libraries are not needed:
 			"-DBUILD_PNG=OFF",
 			"-DBUILD_JPEG=OFF",
@@ -40,9 +52,22 @@ define_target "opencv" do |target|
 	target.depends "Library/png"
 	target.depends "Library/jpeg"
 	target.depends "Library/z"
+	target.depends "Library/dl"
 	
 	target.provides "Library/opencv" do
-		append linkflags ["-lopencv_calib3d", "-lopencv_core", "-lopencv_features2d", "-lopencv_flann", "-lopencv_imgproc", "-lopencv_ml", "-lopencv_photo", "-lopencv_video"]
+		append linkflags [
+			->{install_prefix + "share/OpenCV/3rdparty/lib/libippicv.a"},
+			->{install_prefix + "lib/libopencv_calib3d.a"},
+			->{install_prefix + "lib/libopencv_core.a"},
+			->{install_prefix + "lib/libopencv_features2d.a"},
+			->{install_prefix + "lib/libopencv_flann.a"},
+			->{install_prefix + "lib/libopencv_highgui.a"},
+			->{install_prefix + "lib/libopencv_imgproc.a"},
+			->{install_prefix + "lib/libopencv_ml.a"},
+			->{install_prefix + "lib/libopencv_objdetect.a"},
+			->{install_prefix + "lib/libopencv_photo.a"},
+			->{install_prefix + "lib/libopencv_video.a"}
+		]
 	end
 end
 
