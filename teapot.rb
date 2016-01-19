@@ -12,7 +12,8 @@ define_target "opencv" do |target|
 		"lib/libopencv_core.a",
 		"lib/libopencv_features2d.a",
 		"lib/libopencv_flann.a",
-		"lib/libopencv_highgui.a",
+		# "lib/libopencv_highgui.a",
+		"lib/libopencv_imgcodecs.a",
 		"lib/libopencv_imgproc.a",
 		"lib/libopencv_ml.a",
 		"lib/libopencv_objdetect.a",
@@ -32,11 +33,15 @@ define_target "opencv" do |target|
 			"-DBUILD_opencv_ts=OFF",
 			"-DBUILD_opencv_ts=OFF",
 			#"-DBUILD_opencv_objdetect=OFF",
-			#"-DBUILD_opencv_highgui=OFF",
+			"-DBUILD_opencv_highgui=OFF",
 			# 3rd party libraries are not needed:
 			"-DBUILD_PNG=OFF",
 			"-DBUILD_JPEG=OFF",
 			"-DBUILD_ZLIB=OFF",
+			"-DWITH_OPENEXR=OFF",
+			"-DWITH_WEBP=OFF",
+			"-DWITH_JASPER=OFF",
+			"-DWITH_TIFF=OFF",
 			"-DBUILD_SHARED_LIBS=OFF",
 		]
 		
@@ -61,12 +66,13 @@ define_target "opencv" do |target|
 			->{install_prefix + "lib/libopencv_core.a"},
 			->{install_prefix + "lib/libopencv_features2d.a"},
 			->{install_prefix + "lib/libopencv_flann.a"},
-			->{install_prefix + "lib/libopencv_highgui.a"},
+			# ->{install_prefix + "lib/libopencv_highgui.a"},
 			->{install_prefix + "lib/libopencv_imgproc.a"},
+			->{install_prefix + "lib/libopencv_imgcodecs.a"},
 			->{install_prefix + "lib/libopencv_ml.a"},
 			->{install_prefix + "lib/libopencv_objdetect.a"},
 			->{install_prefix + "lib/libopencv_photo.a"},
-			->{install_prefix + "lib/libopencv_video.a"}
+			->{install_prefix + "lib/libopencv_video.a"},
 		]
 	end
 end
