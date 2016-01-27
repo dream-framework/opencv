@@ -18,7 +18,7 @@ define_target "opencv" do |target|
 		"lib/libopencv_ml.a",
 		"lib/libopencv_objdetect.a",
 		"lib/libopencv_photo.a",
-		"lib/libopencv_video.a"
+		"lib/libopencv_videoio.a"
 	]
 	
 	target.build do
@@ -73,6 +73,14 @@ define_target "opencv" do |target|
 			->{install_prefix + "lib/libopencv_objdetect.a"},
 			->{install_prefix + "lib/libopencv_photo.a"},
 			->{install_prefix + "lib/libopencv_video.a"},
+			->{install_prefix + "lib/libopencv_videoio.a"},
+			"-ldc1394",
+			"-lswscale",
+			"-lv4l1",
+			"-lv4l2",
+			"-lavcodec",
+			"-lavformat",
+			"-lavutil"
 		]
 	end
 end
