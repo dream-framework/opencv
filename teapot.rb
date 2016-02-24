@@ -54,6 +54,8 @@ define_target "opencv" do |target|
 	target.depends :platform
 	target.depends "Language/C++11"
 	
+	target.depends :opencv_platform
+	
 	target.depends "Library/png"
 	target.depends "Library/jpeg"
 	target.depends "Library/z"
@@ -74,13 +76,6 @@ define_target "opencv" do |target|
 			->{install_prefix + "lib/libopencv_photo.a"},
 			->{install_prefix + "lib/libopencv_video.a"},
 			->{install_prefix + "lib/libopencv_videoio.a"},
-			"-ldc1394",
-			"-lswscale",
-			"-lv4l1",
-			"-lv4l2",
-			"-lavcodec",
-			"-lavformat",
-			"-lavutil"
 		]
 	end
 end
@@ -90,6 +85,15 @@ define_configuration "opencv" do |configuration|
 	
 	configuration.require "png"
 	configuration.require "jpeg"
+	
+	# Provides suitable packages for building on windows:
+	host /linux/ do
+		configuration.require "opencv-linux"
+	end
+	
+	host /darwin/ do
+		configuration.require "opencv-darwin"
+	end
 end
 
 define_configuration "local" do |configuration|
